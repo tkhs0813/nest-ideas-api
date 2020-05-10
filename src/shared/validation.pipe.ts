@@ -2,7 +2,6 @@ import {
   PipeTransform,
   Injectable,
   ArgumentMetadata,
-  BadRequestException,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
