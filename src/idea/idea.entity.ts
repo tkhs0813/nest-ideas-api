@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   ManyToOne,
   UpdateDateColumn,
+  JoinTable,
+  ManyToMany,
 } from 'typeorm';
 import { UserEntity } from 'src/user/user.entity';
 import { UserRO } from 'src/user/user.dto';
@@ -27,13 +29,12 @@ export class IdeaEntity {
     author => author.ideas,
   )
   author: UserEntity;
-}
 
-export class IdeaRO {
-  id?: string;
-  updated: Date;
-  created: Date;
-  idea: string;
-  description: string;
-  author: UserRO;
+  @ManyToMany(type => UserEntity, { cascade: true })
+  @JoinTable()
+  upvotes: UserEntity[];
+
+  @ManyToMany(type => UserEntity, { cascade: true })
+  @JoinTable()
+  downvotes: UserEntity[];
 }
